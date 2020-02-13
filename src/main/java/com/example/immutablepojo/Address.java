@@ -1,5 +1,7 @@
 package com.example.immutablepojo;
 
+import com.example.immutablepojo.util.Assert;
+
 public class Address {
 
     private final String line1;
@@ -9,10 +11,14 @@ public class Address {
     private final String zipCode;
 
     private Address(Builder builder) {
+        Assert.hasText(builder.line1, "line1 must have text");
         line1 = builder.line1;
         line2 = builder.line2;
+        Assert.hasText(builder.city, "city must have text");
         city = builder.city;
+        Assert.hasText(builder.state, "state must have text");
         state = builder.state;
+        Assert.hasText(builder.zipCode, "zipCode must have text");
         zipCode = builder.zipCode;
     }
 

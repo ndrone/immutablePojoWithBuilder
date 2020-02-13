@@ -1,12 +1,18 @@
 package com.example.immutablepojo;
 
+import com.example.immutablepojo.util.Assert;
+
 public class Phone {
+    private static final String PHONE_NUMBER_REGEX = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+
     private final String number;
     private final String type;
 
-    private Phone(Builder builder) {
-        number = builder.number;
-        type = builder.type;
+    public Phone(String number, String type) {
+        Assert.hasPattern(PHONE_NUMBER_REGEX, number, "number must match pattern: " + PHONE_NUMBER_REGEX);
+        this.number = number;
+        Assert.hasText(type, "type must have text");
+        this.type = type;
     }
 
     public String getNumber() {
@@ -23,28 +29,5 @@ public class Phone {
                 "number='" + number + '\'' +
                 ", type='" + type + '\'' +
                 '}';
-    }
-
-
-    public static final class Builder {
-        private String number;
-        private String type;
-
-        public Builder() {
-        }
-
-        public Builder withNumber(String val) {
-            number = val;
-            return this;
-        }
-
-        public Builder withType(String val) {
-            type = val;
-            return this;
-        }
-
-        public Phone build() {
-            return new Phone(this);
-        }
     }
 }

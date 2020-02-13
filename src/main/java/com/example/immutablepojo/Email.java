@@ -1,12 +1,19 @@
 package com.example.immutablepojo;
 
+
+import com.example.immutablepojo.util.Assert;
+
 public class Email {
+    private static final String EMAIL_REGEX = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+";
+
     private final String address;
     private final String type;
 
-    private Email(Builder builder) {
-        address = builder.address;
-        type = builder.type;
+    public Email(String address, String type) {
+        Assert.hasPattern(EMAIL_REGEX, address, "address must match pattern: " + EMAIL_REGEX);
+        this.address = address;
+        Assert.hasText(type, "type must have text");
+        this.type = type;
     }
 
     public String getAddress() {
@@ -23,28 +30,5 @@ public class Email {
                 "address='" + address + '\'' +
                 ", type='" + type + '\'' +
                 '}';
-    }
-
-
-    public static final class Builder {
-        private String address;
-        private String type;
-
-        public Builder() {
-        }
-
-        public Builder withAddress(String val) {
-            address = val;
-            return this;
-        }
-
-        public Builder withType(String val) {
-            type = val;
-            return this;
-        }
-
-        public Email build() {
-            return new Email(this);
-        }
     }
 }
