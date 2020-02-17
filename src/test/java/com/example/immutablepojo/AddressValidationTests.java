@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class AddressValidationTests {
+class AddressValidationTests {
 
     @ParameterizedTest
     @CsvSource({"123 main st, , city, state, 12345",

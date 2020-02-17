@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class PhoneValidationTests {
+class PhoneValidationTests {
 
     @ParameterizedTest
     @CsvSource({"+11235551234, cell",

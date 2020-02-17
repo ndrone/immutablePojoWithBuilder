@@ -2,6 +2,9 @@ package com.example.immutablepojo;
 
 import org.springframework.util.Assert;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = Address.Builder.class)
 public class Address {
 
     private final String line1;
