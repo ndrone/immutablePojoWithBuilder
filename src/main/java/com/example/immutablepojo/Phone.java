@@ -1,15 +1,19 @@
 package com.example.immutablepojo;
 
-import com.example.immutablepojo.util.Assert;
+import java.util.regex.Pattern;
+
+import org.springframework.util.Assert;
 
 public class Phone {
-    private static final String PHONE_NUMBER_REGEX = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+    private static final String PHONE_NUMBER_REGEX = "^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$";
+    private static final Pattern PHONE_PATTERN = Pattern.compile(PHONE_NUMBER_REGEX);
 
     private final String number;
     private final String type;
 
     public Phone(String number, String type) {
-        Assert.hasPattern(PHONE_NUMBER_REGEX, number, "number must match pattern: " + PHONE_NUMBER_REGEX);
+        Assert.state(PHONE_PATTERN.matcher(number).matches(),
+                "number must match pattern: " + PHONE_NUMBER_REGEX);
         this.number = number;
         Assert.hasText(type, "type must have text");
         this.type = type;

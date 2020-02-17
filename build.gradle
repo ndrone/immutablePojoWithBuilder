@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+	implementation('org.springframework:spring-core:5.2.3.RELEASE')
 	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
 	testImplementation('pl.pojo:pojo-tester:0.7.6')
 }

@@ -1,6 +1,6 @@
 package com.example.immutablepojo;
 
-import com.example.immutablepojo.util.Assert;
+import org.springframework.util.Assert;
 
 public class Address {
 

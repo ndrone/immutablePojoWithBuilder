@@ -2,6 +2,10 @@ package com.example.immutablepojo;
 
 import java.util.Collection;
 
+import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
 public class Person {
     private final String firstName;
     private final String lastName;
@@ -10,6 +14,10 @@ public class Person {
     private final Collection<Phone> phones;
 
     private Person(Builder builder) {
+        Assert.isTrue((StringUtils.hasText(builder.firstName) || StringUtils.hasText(builder.lastName)
+                || !CollectionUtils.isEmpty(builder.addresses) || !CollectionUtils.isEmpty(builder.emails)
+                        || !CollectionUtils.isEmpty(builder.phones)),
+                "firstName or lastName must have text if addresses or emails or phones are empty");
         firstName = builder.firstName;
         lastName = builder.lastName;
         addresses = builder.addresses;
