@@ -17,6 +17,8 @@ class AddressSerializationTests {
     private static final String CITY = "Cincinnati";
     private static final String STATE = "OH";
     private static final String ZIP_CODE = "12345";
+    private static final String ADDRESS_JSON = "{\"line1\":\"" + LINE_1 + "\",\"line2\":\"" + LINE_2
+            + "\",\"city\":\"" + CITY + "\",\"state\":\"" + STATE + "\",\"zipCode\":\"" + ZIP_CODE + "\"}";
 
     // I've added StopWatch in this because I saw a 10x jump in method timing and I wanted to see
     // where it was taking the time
@@ -46,8 +48,7 @@ class AddressSerializationTests {
     @Test
     void read() throws JsonProcessingException {
         Address address = OBJECT_MAPPER.readerFor(Address.class)
-                .readValue("{\"line1\":\"" + LINE_1 + "\",\"line2\":\"" + LINE_2 + "\",\"city\":\""
-                        + CITY + "\",\"state\":\"" + STATE + "\",\"zipCode\":\"" + ZIP_CODE + "\"}");
+                .readValue(ADDRESS_JSON);
 
         Assertions.assertNotNull(address);
         Assertions.assertEquals(LINE_1, address.getLine1(), "Line 1 should be equals");

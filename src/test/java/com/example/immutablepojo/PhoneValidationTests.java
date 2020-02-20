@@ -12,17 +12,18 @@ class PhoneValidationTests {
 
     @ParameterizedTest
     @CsvSource({"+11235551234, cell",
-                "11235551234, cell",
-                "(123)5551234, cell",
-                "123-555-1234, cell"})
+            "11235551234, cell",
+            "(123)5551234, cell",
+            "123-555-1234, cell"})
     void createValidPhonePojos(String phone, String type) {
-        Assertions.assertNotNull(new Phone(phone, type));
+        Assertions.assertNotNull(new Phone.Builder().withNumber(phone).withType(type).build());
     }
 
     @ParameterizedTest
     @MethodSource("invalidPhoneArgs")
     void createInvalidPhonePojos(String phone, String type) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Phone(phone, type));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Phone.Builder().withNumber(phone).withType(type).build());
     }
 
     private static Stream<Arguments> invalidPhoneArgs() {

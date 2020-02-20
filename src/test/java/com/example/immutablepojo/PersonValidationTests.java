@@ -23,13 +23,14 @@ class PersonValidationTests {
         return Stream.of(
                 Arguments.of("firstName", null, null, null, null),
                 Arguments.of(null, "lastName", null, null, null),
-                Arguments.of(null, null, Collections.singleton(new Address.Builder()
-                        .withLine1("123 Main st").withCity("city").withState("state").withZipCode("12345").build())
+                Arguments.of(null, null, Collections.singleton(
+                        new Address.Builder().withLine1("123 Main st").withCity("city").withState("state")
+                                .withZipCode("12345").build())
                         , null, null),
                 Arguments.of(null, null, null, Collections.singleton(
-                        new Email("test@test.com", "home")), null),
+                        new Email.Builder().withAddress("test@test.com").withType("home").build()), null),
                 Arguments.of(null, null, null, null, Collections.singleton(
-                        new Phone("123-456-7890", "cell")))
+                        new Phone.Builder().withNumber("123-456-7890").withType("cell").build()))
         );
     }
 

@@ -12,13 +12,14 @@ class EmailValidationTests {
     @CsvSource({"blah@blah.com, home",
             "test.test@testing.com, home"})
     void createValidEmailPojos(String email, String type) {
-        Assertions.assertNotNull(new Email(email, type));
+        Assertions.assertNotNull(new Email.Builder().withAddress(email).withType(type).build());
     }
 
     @ParameterizedTest
     @MethodSource("invalidEmailArgs")
     void createInvalidEmailPojos(String email, String type) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Email(email, type));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Email.Builder().withAddress(email).withType(type).build());
     }
 
     private static Stream<Arguments> invalidEmailArgs() {
