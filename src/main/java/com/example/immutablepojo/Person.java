@@ -1,6 +1,7 @@
 package com.example.immutablepojo;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
@@ -37,15 +38,15 @@ public class Person {
     }
 
     public Collection<Address> getAddresses() {
-        return addresses;
+        return addresses.stream().collect(Collectors.toUnmodifiableList());
     }
 
     public Collection<Email> getEmails() {
-        return emails;
+        return emails.stream().collect(Collectors.toUnmodifiableList());
     }
 
     public Collection<Phone> getPhones() {
-        return phones;
+        return phones.stream().collect(Collectors.toUnmodifiableList());
     }
 
     @Override

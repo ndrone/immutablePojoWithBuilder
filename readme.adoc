@@ -1,0 +1,16 @@
+= Why Immutable POJO's with Builder
+
+Why would we need immutable classes? Aren't classes using setters and getters, i.e. POJOs, enough?
+
+With the upcoming of even more distributed systems and multithreaded programming it's getting harder and harder to reason about the state of a software system. POJOs or mutable classes may be shared between different threads or actors of a software system. They may change the state of the class and due to the non deterministic nature of distributed systems one can not predict the state of a class that was changed by different actors. This is commonly known as a data race condition.
+
+Immutable classes or immutable data in general take one variable out of the reasoning about the state. The state of immutable data is known after creation and will never change. As it never changes, immutable classes are also inherently threadsafe and may be shared between threads.
+
+How do we make a Java class immutable?
+
+* All fields should be final and a class should only provide getters.
+* All return values of accessor methods must be immutable as well.
+* A special case are own classes that are members of another class. These must be immutable as well to guarantee total immutability.
+
+*NOTE* _referenced from_ https://convit.de/blog/blog-immutable-builder-and-jackson-convit.html
+
